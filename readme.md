@@ -4,18 +4,21 @@
 
 It may not have a fancy interface, but the command line can equip journalists with tailor-made tools to analyze data. This hands-on session will build upon your basic command line skills and dive deeper into the csvkit suite of utilities to interview data, mash it up with other sources, analyze it and generate story ideas -- all with the speed and power of the command line.
 
-**This session is good for:** People who have some basic Excel skills and a little bit of command-line experience (example: you went to the [“Command Line for Reporters”](http://ire.org/events-and-training/event/2703/3339/) session preceding this one)
+**This session is good for:** People who have some basic Excel skills and a little bit of command-line experience (example: you went to the [“Command Line for Reporters”](http://ire.org/events-and-training/event/2703/3339/) session preceding this one).
 
+Follow along with the presentation on GitHub:
+
+[http://bit.ly/ire17cldata](http://bit.ly/ire17cldata)
 
 #### What you'll need
 
-**NOTE:** If you're on one of the IRE machines in Pinnacle Peak 1, what you need has been preloaded.
+**NOTE:** If you're on one of the IRE machines in Pinnacle Peak 1, what you need has been preloaded, except for the Census block file.
 
 * [CSVkit](http://csvkit.readthedocs.io/en/latest/index.html), a suite of command-line tools for converting to and working with CSV, the king of tabular file formats
 * Terminal, Apple's built-in command-line utility
 * [Cambridge, Mass., snow ticket data](/snow_tickets.csv)
 * [Cambridge, Mass., SeeClickFix snow removal data](/snow_complaints.csv)
-* [Census block lookup table](/census_lookup.csv)
+* [Census block lookup table](https://raw.githubusercontent.com/mtdukes/command-line-data/master/census_lookup.csv) (Right click to download)
 
 #### What you'll learn
 
@@ -33,14 +36,12 @@ $ pwd
 /Users/mtdukes/Desktop
 ```
 
-**NOTE:** the ```$``` sign you may see in the instructions below is just the Terminal prompt, so don't enter it as a command. Your prompt may look slightly different:
-
 We need to navigate to our project folder with ```cd```. This may be a slightly different process on your machine.
 
 **NOTE:** If you're starting this tutorial from scratch or you're not using an IRE machine, you can clone the GitHub repository with:
 
 ```bash
-git clone [directory]
+git clone https://github.com/mtdukes/command-line-data.git
 ```
 
 #### Basic terminology
@@ -140,9 +141,9 @@ Success! We can now more confidently report that the city has assessed **$26,900
 
 CSVkit gives us the ability to join tables so we can answer bigger, more important questions. One basic question we might have: Which areas seem to get the most tickets?
 
-One way to do that is to add in Census blocks. I've prepared a lookup table [using a U.S. Census geocoding tool](https://geocoding.geo.census.gov/geocoder/geographies/addressbatch?form), which you can download into your folder by right clicking here:
+One way to do that is to add in Census blocks. I've prepared a lookup table [using a U.S. Census geocoding tool](https://geocoding.geo.census.gov/geocoder/geographies/addressbatch?form), which you can download into your folder by right clicking here and clicking "Save as...":
 
-[[Download the file here]]
+**[Census block lookup table](https://raw.githubusercontent.com/mtdukes/command-line-data/master/census_lookup.csv)**
 
 It contains all the unique addresses in our snow report dataset, along with the Census tracts and block numbers.
 
