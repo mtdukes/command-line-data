@@ -8,7 +8,7 @@ It may not have a fancy interface, but the command line can equip journalists wi
 
 Follow along with the presentation on GitHub:
 
-[http://bit.ly/ire17cldata](http://bit.ly/ire17cldata)
+[bit.ly/ire17cldata](http://bit.ly/ire17cldata)
 
 #### What you'll need
 
@@ -63,7 +63,9 @@ It's 110 degrees outside, so let's think cool.
 
 ![Think cold thoughts](https://dl.dropboxusercontent.com/u/49960384/gifs/snow-nook.gif "Think cold thoughts")
 
-This workshop will use two spreadsheets, both obtained via public records request from the city of Cambridge, Mass., in winter 2017. The first is a listing of every fine issued by the city to violators of its ice and snow removal ordinance, which requires residents to shovel their sidewalks. The second is the database of complaints about slippery sidewalks submitted to the city's online SeeClickFix portal.
+This workshop will use two spreadsheets, both obtained via public records request from the city of Cambridge, Mass., in winter 2017. The first is a listing of every fine issued by the city to violators of its ice and snow removal ordinance, which requires residents to shovel their sidewalks.
+
+The second is the database of complaints about slippery sidewalks submitted to the city's online SeeClickFix portal, which you will explore on your own.
 
 #### Taking a closer look
 
@@ -105,7 +107,7 @@ You can escape this view by pressing ```q```.
 Now let's go back to that $27,900 figure we calculated before. You may have noticed one of the field contains broad categories about the status of the tickets the city has issued in the ```current_action``` field. We can look specifically at that field using ```csvstat``` with a column flag.
 
 ```
-csvstat -c current_action snow_tickets_clean.cs
+csvstat -c current_action snow_tickets_clean.csv
 ```
 
 I can see there are 10 unique values here, so I want to see them all to make sure I understand the data. It might help me ask better questions later. We can use two other flags -- ```--freq``` and ```--freq-count``` -- to pull that information out.
@@ -143,7 +145,7 @@ CSVkit gives us the ability to join tables so we can answer bigger, more importa
 
 One way to do that is to add in Census blocks. I've prepared a lookup table [using a U.S. Census geocoding tool](https://geocoding.geo.census.gov/geocoder/geographies/addressbatch?form), which you can download into your folder by right clicking here and clicking "Save as...":
 
-**[Census block lookup table](https://raw.githubusercontent.com/mtdukes/command-line-data/master/census_lookup.csv)**
+* **[Census block lookup table](https://raw.githubusercontent.com/mtdukes/command-line-data/master/census_lookup.csv)**
 
 It contains all the unique addresses in our snow report dataset, along with the Census tracts and block numbers.
 
@@ -163,4 +165,23 @@ By running ```csvstat``` on our new file, we can see that a couple of Census blo
 csvstat -c block_tract --freq --freq-count 10 snow_tickets_blocks.csv
 ```
 
-What's going on here? Let's filter our table by the top-offender -- tract/block 3535002002 -- and see if we can look more closely. We can type some of those addresses [into Google Maps](https://www.google.com/maps/place/579+Franklin+St,+Cambridge,+MA+02139/@42.3682558,-71.1120149,18z/data=!4m5!3m4!1s0x89e3775bac5ce3bb:0x4ff199f0c7070371!8m2!3d42.3684286!4d-71.1123539) and narrow down our search area.
+What's going on here? Let's filter our table by the top-offender -- tract/block 3535002002 -- and see if we can look more closely.
+
+```
+csvgrep -c block_tract -m 3535002002 snow_tickets_blocks.csv | csvlook | less -S
+```
+
+We can type some of those addresses [into Google Maps](https://www.google.com/maps/place/579+Franklin+St,+Cambridge,+MA+02139/@42.3682558,-71.1120149,18z/data=!4m5!3m4!1s0x89e3775bac5ce3bb:0x4ff199f0c7070371!8m2!3d42.3684286!4d-71.1123539) and narrow down our search area.
+
+#### Explore!
+
+Now, feel free to explore the collection of snow complaints on your own, using what you've learned so far about CSVkit.
+
+```
+csvstat snow_complaints.csv
+```
+
+#### More resources
+* [Learn Command Line the Hard Way](https://learncodethehardway.org/unix/)
+* [CSVkit reference](http://csvkit.readthedocs.io/en/latest/index.html)
+* [Wireservice](https://github.com/wireservice), a series of tools for working with data in the command line, programming languages and Web development
